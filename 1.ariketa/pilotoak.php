@@ -1,48 +1,29 @@
 <?php
-$servername = "localhost:3306";
-$username = "root";
-$password = "1MG2024";
-$dbname = "ML_8.Ataza";
+require_once("db.php");
  
-//Konexioa sortu
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-//Konexioa konprobatu
-if ($conn->connect_error) {
-    die("Konexio Errorea" . $conn->connect_error);
-} else {
-    
-}
-
-
-if ($_GET["akzioa"] == "lortuPilotoa") {
-
+if ($_GET["akzioa"] == "pilotoa") {
     $conn = konexioaSortu();
-
-    $sql = "SELECT * FROM pilotoak";
+ 
+    $sql = "SELECT Postua, Dortsala, Izena FROM pilotoak order by Postua asc";
     $result = $conn->query($sql);
     $pilotoak = [];
-
-    if ($result->num_rows > 0) {
+ 
+    if ($result->num_rows > 0) {    
         $kontadorea = 0;
         while ($row = $result->fetch_assoc()) {
-            $pilotoak[$kontadorea] = ["postua" => $row["postua"], "dortsala" => $row["dortsala"], "izena"=> $row["izena"]];
-            $kontadorea++;
+            $pilotoak[$kontadorea] = ["Postua" => $row["Postua"], "Dortsala" => $row["Dortsala"], "Izena" => $row["Izena"]];
+            $kontadorea ++;
         }
-        
-       
-
         $pilotoak["kopurua"] = $kontadorea;
        
-        ;
-
     } else {
         $pilotoak["kopurua"] = 0;
     }
-        $bueltanDatorrenInformazioa=json_encode($pilotoak);
-        echo $bueltanDatorrenInformazioa;
-        die;
-    }
-
-
-
+ 
+    $bueltatutakoInformazioa = json_encode($pilotoak);
+    echo $bueltatutakoInformazioa;
+    die;
+   
+   
+}
+?>
