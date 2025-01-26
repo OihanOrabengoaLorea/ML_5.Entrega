@@ -96,6 +96,22 @@ $conn->close();
         }
  
     </script>
+    <style>
+        .taula th {
+            background-color: #f1f1f1;
+        }
+
+        .taula {
+            margin-top: 10px;
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .taula th, .taula td {
+            padding: 8px 12px;
+            text-align: left;
+        }
+    </style>
  
 </body>
  
